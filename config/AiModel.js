@@ -1,0 +1,45 @@
+const {
+    GoogleGenerativeAI,
+    HarmCategory,
+    HarmBlockThreshold,
+  } = require("@google/generative-ai");
+  
+  const apiKey = "AIzaSyAXj3mdkx5rXTKyIZCd6XPUJ3R0OSg07Tk";
+  const genAI = new GoogleGenerativeAI(apiKey);
+  
+  const model = genAI.getGenerativeModel({
+    model: "gemini-1.5-flash",
+  });
+  
+  const generationConfig = {
+    temperature: 1,
+    topP: 0.95,
+    topK: 40,
+    maxOutputTokens: 8192,
+    responseMimeType: "application/json",
+  };
+  
+  
+    export const chatSession = model.startChat({
+      generationConfig,
+      history: [
+        {
+          role: "user",
+          parts: [
+            {text: "Generate a detailed travel plan in JSON format for a trip to Kutch’s white desert lasting 3 days and 2 nights for 3 travelers, with a 8000 budget. The traveler type is Friend. The plan should include:\n\n1. **Hotel Options**: Each hotel entry should contain:\n   - Hotel name\n   - Address\n   - Price per night\n   - Image URL\n   - Geo coordinates\n   - Rating\n   - Brief description.\n\n2. **Nearby Places to Visit**: Each place should include:\n   - Place name\n   - Address\n   - Ticket price (e.g., \"₹500\")\n   - Description (including suggested activities)\n   - Place image URL\n   - Geo coordinates\n   - Best time to visit\n   - Estimated travel time from the hotel.\n\n3. **Itinerary**: For each day of the trip, provide a detailed itinerary that includes:\n   - **Time of Visit**: Indicating the time of day.\n   - **Activity**: Detailed descriptions of what the traveler should do during that time.\n   - **Place Details**: Include place name, description, ticket pricing (e.g., \"₹500\"), and estimated travel time from the hotel.\n   - **Suggested Activities**: Mention activities to do during the visit (e.g., sightseeing, shopping, camel riding).\n   - **Best Time to Visit**: Indicate the ideal time (morning, afternoon, evening).\n   - **Transportation**: Specify how to travel between locations using {transportation} and provide estimated journey times.\n\nThe budget should be optimized for 3 travelers and ensure the activities and accommodation options are within the 8000 limit.\n\nTransportation will be by public transport, offering an affordable and local travel experience."},
+          ],
+        },
+        {
+          role: "model",
+          parts: [
+            {text: "```json\n{\n  \"tripName\": \"Kutch White Desert Adventure (3 Days, 2 Nights)\",\n  \"travelers\": 3,\n  \"budget\": 8000,\n  \"travelerType\": \"Friends\",\n  \"transportation\": \"Public Transport (buses, auto-rickshaws)\",\n  \"hotels\": [\n    {\n      \"hotelName\": \"Desert Crown Hotel\",\n      \"address\": \"Dhordo, Gujarat\",\n      \"pricePerNight\": 1500,\n      \"imageUrl\": \"https://example.com/desertcrown.jpg\",\n      \"geoCoordinates\": { \"lat\": 23.98, \"long\": 70.22 },\n      \"rating\": 4.0,\n      \"description\": \"A comfortable hotel with basic amenities, offering a good view of the desert.\"\n    },\n    {\n      \"hotelName\": \"The White Rann Resort\",\n      \"address\": \"Hodka, Gujarat\",\n      \"pricePerNight\": 2000,\n      \"imageUrl\": \"https://example.com/whiterannresort.jpg\",\n      \"geoCoordinates\": { \"lat\": 23.95, \"long\": 70.15 },\n      \"rating\": 4.5,\n      \"description\": \"A slightly more luxurious option with better amenities and a pool.\"\n    }\n  ],\n  \"nearbyPlaces\": [\n    {\n      \"placeName\": \"White Rann of Kutch\",\n      \"address\": \"Great Rann of Kutch, Gujarat\",\n      \"ticketPrice\": \"Free\",\n      \"description\": \"Vast salt desert, breathtaking sunsets, and unique landscape. Enjoy camel rides, photography, and stargazing.\",\n      \"imageUrl\": \"https://example.com/whiterann.jpg\",\n      \"geoCoordinates\": { \"lat\": 23.9, \"long\": 70.0 },\n      \"bestTimetoVisit\": \"Sunset\",\n      \"travelTimeFromHotel\": \"1-2 hours (depending on hotel location)\"\n    },\n    {\n      \"placeName\": \"Dhordo Village\",\n      \"address\": \"Dhordo, Gujarat\",\n      \"ticketPrice\": \"Free\",\n      \"description\": \"Experience the local culture, visit local shops, and interact with friendly people.\",\n      \"imageUrl\": \"https://example.com/dhordovillage.jpg\",\n      \"geoCoordinates\": { \"lat\": 23.98, \"long\": 70.22 },\n      \"bestTimetoVisit\": \"Anytime\",\n      \"travelTimeFromHotel\": \"10-30 minutes (depending on hotel location)\"\n    }\n  ],\n  \"itinerary\": [\n    {\n      \"day\": 1,\n      \"plan\": [\n        {\n          \"time\": \"Afternoon (2 PM)\",\n          \"activity\": \"Arrival in Bhuj and travel to hotel in Dhordo/Hodka.\",\n          \"placeDetails\": {\n            \"placeName\": \"Hotel (choose from above)\",\n            \"description\": \"\",\n            \"ticketPrice\": \"\",\n            \"travelTimeFromHotel\": \"\"\n          },\n          \"suggestedActivities\": \"Check-in, freshen up\",\n          \"bestTimetoVisit\": \"Afternoon\",\n          \"transportation\": \"Bus/Taxi from Bhuj\"\n        },\n        {\n          \"time\": \"Evening (6 PM)\",\n          \"activity\": \"Visit the White Rann of Kutch for sunset.\",\n          \"placeDetails\": {\n            \"placeName\": \"White Rann of Kutch\",\n            \"description\": \"Vast salt desert\",\n            \"ticketPrice\": \"Free\",\n            \"travelTimeFromHotel\": \"1-2 hours\"\n          },\n          \"suggestedActivities\": \"Camel ride (negotiate price), photography, enjoy the sunset\",\n          \"bestTimetoVisit\": \"Sunset\",\n          \"transportation\": \"Local Bus/Taxi\"\n        }\n      ]\n    },\n    {\n      \"day\": 2,\n      \"plan\": [\n        {\n          \"time\": \"Morning (8 AM)\",\n          \"activity\": \"Visit Dhordo Village.\",\n          \"placeDetails\": {\n            \"placeName\": \"Dhordo Village\",\n            \"description\": \"Local Village\",\n            \"ticketPrice\": \"Free\",\n            \"travelTimeFromHotel\": \"30 minutes\"\n          },\n          \"suggestedActivities\": \"Explore the local market, interact with the locals, buy souvenirs.\",\n          \"bestTimetoVisit\": \"Morning\",\n          \"transportation\": \"Auto-rickshaw/Walking\"\n        },\n        {\n          \"time\": \"Afternoon (1 PM)\",\n          \"activity\": \"Lunch at a local restaurant in Dhordo.\",\n          \"placeDetails\": {\n            \"placeName\": \"Local Restaurant\",\n            \"description\": \"Thalis and local Kutchhi cuisine\",\n            \"ticketPrice\": \"₹300 per person (approx)\",\n            \"travelTimeFromHotel\": \"5 minutes\"\n          },\n          \"suggestedActivities\": \"Enjoy local food\",\n          \"bestTimetoVisit\": \"Afternoon\",\n          \"transportation\": \"Walking\"\n        },\n        {\n          \"time\": \"Evening (5 PM)\",\n          \"activity\": \"Relax at the hotel or explore nearby areas.\",\n          \"placeDetails\": {\n            \"placeName\": \"Hotel\",\n            \"description\": \"\",\n            \"ticketPrice\": \"\",\n            \"travelTimeFromHotel\": \"5 minutes\"\n          },\n          \"suggestedActivities\": \"Relaxation, star gazing\",\n          \"bestTimetoVisit\": \"Evening\",\n          \"transportation\": \"Walking\"\n        }\n      ]\n    },\n    {\n      \"day\": 3,\n      \"plan\": [\n        {\n          \"time\": \"Morning (8 AM)\",\n          \"activity\": \"Enjoy the sunrise at the White Rann (optional).\",\n          \"placeDetails\": {\n            \"placeName\": \"White Rann of Kutch\",\n            \"description\": \"Salt desert\",\n            \"ticketPrice\": \"Free\",\n            \"travelTimeFromHotel\": \"1-2 hours\"\n          },\n          \"suggestedActivities\": \"Sunrise Photography\",\n          \"bestTimetoVisit\": \"Sunrise\",\n          \"transportation\": \"Local Bus/Taxi\"\n        },\n        {\n          \"time\": \"Late Morning (11 AM)\",\n          \"activity\": \"Check out from hotel and travel back to Bhuj.\",\n          \"placeDetails\": {\n            \"placeName\": \"Bhuj\",\n            \"description\": \"City\",\n            \"ticketPrice\": \"\",\n            \"travelTimeFromHotel\": \"2 hours\"\n          },\n          \"suggestedActivities\": \"Travel to your next destination\",\n          \"bestTimetoVisit\": \"Morning\",\n          \"transportation\": \"Bus\"\n        }\n      ]\n    }\n  ]\n}\n```\n\n**Note:** This plan uses placeholder image URLs.  Replace these with actual image URLs.  The budget is an approximation and may vary based on actual costs.  Always confirm prices and availability before booking.  The travel times are estimates and can vary depending on traffic conditions.  Negotiate prices for camel rides and other activities.  Consider adding buffer time for unexpected delays.  Food costs are estimated separately at ₹300 per person per day.  Consider including a buffer for miscellaneous expenses.\n"},
+          ],
+        },
+      ],
+    });
+  
+    // const result = await chatSession.sendMessage("INSERT_INPUT_HERE");
+    // console.log(result.response.text());
+  
+  
+  // run();

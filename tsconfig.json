@@ -1,17 +1,22 @@
 {
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
-    "strict": true,
+    "strict": true,"types": ["expo", "node"],
+    "jsx": "react-jsx",
     "paths": {
       "@/*": [
         "./*"
-      ]
-    }
+      ],
+    },
+    "typeRoots": ["./node_modules/@types", "./src/types"]
+    
   },
   "include": [
     "**/*.ts",
     "**/*.tsx",
     ".expo/types/**/*.ts",
-    "expo-env.d.ts"
-  ]
+    "expo-env.d.ts",
+    "router.d.ts",
+    "src/**/*"
+, "app/(tabs)/home.js", "app/create-trip/budget.jsx", "context/CreateTripContext.jsx", "app/create-trip", "app/(tabs)/_layout.js", "context/UserLocationContext.js"  ]
 }
