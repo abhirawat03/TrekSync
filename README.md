@@ -78,7 +78,7 @@ Join our community of developers creating universal apps.
 ![25](https://github.com/abhirawat03/TrekSync/blob/master/Screenshot/IMG-20250331-WA0012.png)
 ![26](https://github.com/abhirawat03/TrekSync/blob/master/Screenshot/IMG-20250331-WA0011.png)
 ![27](https://github.com/abhirawat03/TrekSync/blob/master/Screenshot/IMG-20250331-WA0010.jpg)
-![28](https://github.com/abhirawat03/TrekSync/blob/master/Screenshot/IMG-20250331-WA0009.jpg)
+![28](https://github.com/abhirawat03/TrekSync/blob/master/Screenshot/IMG-20250331-WA0009.png)
 ![29](https://github.com/abhirawat03/TrekSync/blob/master/Screenshot/IMG-20250331-WA0008.png)
 
 
