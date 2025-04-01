@@ -2,10 +2,11 @@ import { initializeAuth, getReactNativePersistence } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage';
-
+import Constants from "expo-constants";
 // Your Firebase configuration
+const Firebase_API_KEY = Constants.expoConfig?.extra?.Firebase_API_KEY;
 const firebaseConfig = {
-  apiKey: "AIzaSyAcJly19Lej9FVKKCXxExoiae7Lpf0DU_g",
+  apiKey: Firebase_API_KEY,
   authDomain: "first-68788.firebaseapp.com",
   projectId: "first-68788",
   storageBucket: "first-68788.firebasestorage.app", 
