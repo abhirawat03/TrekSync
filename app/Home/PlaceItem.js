@@ -3,8 +3,9 @@ import React from "react";
 import { AntDesign } from "@expo/vector-icons";
 import Colors from "../../components/Colors";
 import HorizontalLine from "./HorizontalLine";
-
+import Constants from "expo-constants";
 export default function PlaceItem({ place }) {
+  const GOOGLE_API_KEY = Constants.expoConfig?.extra?.GOOGLE_API_KEY;
   return (
     <View style={styles.container}>
       {/* Image Section */}
@@ -17,7 +18,7 @@ export default function PlaceItem({ place }) {
                 "?maxwidth=400" +
                 "&photo_reference=" +
                 place?.photos[0]?.photo_reference +
-                "&key=AIzaSyCcRk-HFj5gn_zIVFANyqtiAKK3c-8gmLQ",
+                "&key="+GOOGLE_API_KEY,
             }}
             style={styles.image}
           />

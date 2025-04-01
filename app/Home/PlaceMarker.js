@@ -14,7 +14,7 @@ export default function PlaceMarker({item}) {
             longitudeDelta: 0.0421,
           }
     }
-     >
+    >
     
         </Marker>
   )

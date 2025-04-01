@@ -4,8 +4,10 @@ import { AntDesign, Ionicons } from "@expo/vector-icons";
 import Colors from '../../components/Colors';
 import Share from '../../Services/Share';
 import GoogleMapView from '../Home/GoogleMapView';
+import Constants from "expo-constants";
 
 export default function PlaceDetailItem({ place, onDirectionClick }) {
+  const GOOGLE_API_KEY = Constants.expoConfig?.extra?.GOOGLE_API_KEY;
   return (
     <View style={styles.container}>
       <Text style={styles.placeName}>
@@ -25,7 +27,7 @@ export default function PlaceDetailItem({ place, onDirectionClick }) {
               "?maxwidth=400" +
               "&photo_reference=" +
               place?.photos[0]?.photo_reference +
-              "&key=AIzaSyCcRk-HFj5gn_zIVFANyqtiAKK3c-8gmLQ",
+              "&key="+GOOGLE_API_KEY,
           }}
           style={styles.placeImage}
         />
